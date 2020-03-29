@@ -61,6 +61,8 @@ public class DuplicateRemover {
             for (String s: uniqueWords) {
                 out.print(s + " ");
             }
+            
+            //end it all
             out.flush();
             streamOut.close();
 			
@@ -74,13 +76,15 @@ public class DuplicateRemover {
 	 */
 	private void friendly() {
 		AudioInputStream hello = null;
+		Clip clip = null;
+		File audio = new File("friendly.wav");
 		try {
-			hello = AudioSystem.getAudioInputStream(new File("friendly.wav"));
-			Clip clip = AudioSystem.getClip();
+			hello = AudioSystem.getAudioInputStream(audio);
+			clip = AudioSystem.getClip();
 			clip.open(hello);
 			FloatControl vol = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-			vol.setValue(-13f);
-			clip.start();				
+			vol.setValue(-13f); //I dont want to deafen the TA
+			clip.start();	
 		} 
 		catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
 			System.out.println("[Alarms blaring]");			
@@ -105,7 +109,12 @@ public class DuplicateRemover {
 			Thread.sleep(1000);
 			System.out.println("We found him trying to hide the files, sir!");
 			
-			try { hello.close(); 
+			try { 
+				if(audio.exists()) {
+					clip.stop();
+					hello.close(); 
+					clip.close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
