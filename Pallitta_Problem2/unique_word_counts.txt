@@ -1,0 +1,10 @@
+BUT = 1
+WHEN = 2
+AND = 1
+WAS = 2
+WHY = 1
+IS = 4
+THEN = 2
+WHAT = 1
+BECAUSE = 2
+ABOUT = 1

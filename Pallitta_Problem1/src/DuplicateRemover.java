@@ -25,18 +25,17 @@ public class DuplicateRemover {
 	 * @throws FileNotFoundException 
 	 */
 	public void remove (String dataFile)
-	{
-		
+	{		
 		File data = new File(dataFile);
 		Scanner inScan = null;
 		
 		try {
 			inScan = new Scanner(data);
-		} catch (FileNotFoundException e) {
+		} 
+		catch (FileNotFoundException e) {
 			friendly();	//user-friendly
 			e.printStackTrace();
 		}
-
 		//Scan each token 
 		while(inScan.hasNext()) {			
 			String temp = inScan.next();		
@@ -58,22 +57,19 @@ public class DuplicateRemover {
 			}
 			FileOutputStream streamOut = new FileOutputStream(myOutFile, false);
             PrintWriter out = new PrintWriter(streamOut);
-            for (String s: uniqueWords) {
-                out.print(s + " ");
-            }
+            
+            System.out.print("->Output printed to file [" + myOutFile.getName() + "]");
+            out.print(uniqueWords);
             
             //end it all
             out.flush();
-            streamOut.close();
-			
-		} catch (IOException e) {
+            streamOut.close();			
+		} 
+		catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	/**
-	 *         : )
-	 */
+	}	
+	/**  : )*/
 	private void friendly() {
 		AudioInputStream hello = null;
 		Clip clip = null;
@@ -120,10 +116,7 @@ public class DuplicateRemover {
 			}
 			
 		} catch (InterruptedException e) {
-			e.printStackTrace();
-			
-		}
-	
-	}
-	
+			e.printStackTrace();			
+		}	
+	}	
 }
